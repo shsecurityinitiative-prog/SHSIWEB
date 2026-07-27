@@ -6,7 +6,7 @@ import type { Database } from "@/integrations/supabase/types";
 const schema = z.object({ email: z.string().trim().toLowerCase().email().max(254) });
 
 export const subscribeNewsletter = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => schema.parse(input))
+  .validator((input: unknown) => schema.parse(input))
   .handler(async ({ data }) => {
     const url = process.env.SUPABASE_URL!;
     const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
